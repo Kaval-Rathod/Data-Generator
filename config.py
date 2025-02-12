@@ -7,6 +7,11 @@ class Config:
     CONVERTED_FOLDER = os.path.join(os.getcwd(), 'converted_files')
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB max file size
     
+    # Build and publish configuration
+    BUILD_DIR = os.path.join(os.getcwd(), 'build')
+    STATIC_BUILD = os.path.join(BUILD_DIR, 'static')
+    TEMPLATES_BUILD = os.path.join(BUILD_DIR, 'templates')
+    
     # SambaNova API Keys
     SAMBANOVA_API_KEYS = [
         os.getenv(f"SAMBANOVA_API_KEY_{i}") 

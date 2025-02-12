@@ -7,12 +7,20 @@ import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24)
-app.config['UPLOAD_FOLDER'] = 'uploads'
+
+# For Vercel deployment, we need to use /tmp directory for file uploads
+if os.environ.get('VERCEL_ENV') == 'production':
+    app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
+    app.config['CONVERTED_FOLDER'] = '/tmp/converted_files'
+else:
+    app.config['UPLOAD_FOLDER'] = 'uploads'
+    app.config['CONVERTED_FOLDER'] = 'converted_files'
+
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
 # Ensure upload and output directories exist
 Path(app.config['UPLOAD_FOLDER']).mkdir(exist_ok=True)
-Path('converted_files').mkdir(exist_ok=True)
+Path(app.config['CONVERTED_FOLDER']).mkdir(exist_ok=True)
 
 generator = DatasetGeneratorWeb()
 
@@ -56,11 +64,14 @@ def process_files():
 def download_file(filename):
     try:
         return send_file(
-            f'converted_files/{filename}',
+            os.path.join(app.config['CONVERTED_FOLDER'], filename),
             as_attachment=True
         )
     except Exception as e:
         return jsonify({'error': str(e)}), 404
+
+# Required for Vercel
+app = app
 
 if __name__ == '__main__':
     app.run(debug=True) 

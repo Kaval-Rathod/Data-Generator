@@ -127,3 +127,37 @@ The application includes robust error handling:
    - Multiple API keys help handle rate limits
    - Progress bar shows real-time processing status
 
+## Building for Production
+
+To build the application for production:
+
+1. Run the build script:
+```bash
+python build.py
+```
+
+This will create a `build` directory with the following structure:
+```
+build/
+├── static/          # Static assets (CSS, JS)
+├── templates/       # HTML templates
+├── uploads/         # Upload directory
+├── converted_files/ # Output directory
+├── app.py          # Application code
+├── config.py       # Configuration
+├── run.py          # Entry point
+├── requirements.txt # Dependencies
+└── .env            # Environment configuration
+```
+
+2. Configure the production environment:
+   - Navigate to the `build` directory
+   - Set up your `.env` file with production API keys
+   - Install dependencies: `pip install -r requirements.txt`
+
+3. Run the production server:
+```bash
+cd build
+python run.py
+```
+
