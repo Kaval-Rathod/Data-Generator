@@ -1,0 +1,23 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#processLog {
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-download {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+} 

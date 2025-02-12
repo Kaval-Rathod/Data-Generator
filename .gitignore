@@ -527,3 +527,10 @@ MigrationBackup/
 .ionide/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,vs
+
+# Add these lines to existing .gitignore
+uploads/
+converted_files/
+__pycache__/
+*.pyc
+.env
